@@ -1,0 +1,17 @@
+{
+    "extends": [
+         "standard",
+         "plugin:vue/essential"],
+
+    "rules": {
+         "no-new": 0
+    },
+    "parserOptions": {
+         "ecmaVersion": 2019
+    },
+    "env": {
+         "node": true,
+         "es6": true
+    },
+     "plugins": ["html"]
+}
