@@ -4,6 +4,9 @@
   p(v-if="showValue") {{ value }}
   p(v-else-if="false") {{ 'algo mas' }}
   p(v-else) {{ 'Lo ultimo' }}
+
+  ul
+    li(v-for="i in items") {{ i }}
 </template>
 
 <script>
