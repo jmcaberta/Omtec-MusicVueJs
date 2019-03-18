@@ -1,27 +1,28 @@
 <template lang="pug">
-#app
-  p(v-show="showValue") {{ value }}
-  p(v-if="showValue") {{ value }}
-  p(v-else-if="false") {{ 'algo mas' }}
-  p(v-else) {{ 'Lo ultimo' }}
+  #app
+    input(v-model="name")
+    button(@click="format") Format
 
-  ul
-    li(v-for="i in items") {{ i }}
-</template>
+    p {{ formattedName }}
+  </template>
 
 <script>
 export default {
   name: 'app',
-
   data () {
     return {
-      showValue: false,
-      value: 'Algo'
+      name: '',
+      formattedName: ''
+    }
+  },
+  methods: {
+    format () {
+      this.formattedName = this.name.split(' ').join('-')
     }
   }
 }
 </script>
 
 <style lang="scss">
-@import "./scss/main.scss"
+  @import "./scss/main.scss"
 </style>
