@@ -15,11 +15,7 @@
   </template>
 
 <script>
-const tracks = [
-  { name: 'Muchacha', artist: 'Lius alberto Sanchez' },
-  { name: 'Hoy aca en el baile', artist: 'El pillo' },
-  { name: 'El burrito Cha cha cha', artist: 'La sonora matancera' }
-]
+import trackService from './services/track.js'
 
 export default {
   name: 'app',
@@ -31,7 +27,10 @@ export default {
   },
   methods: {
     search () {
-      this.tracks = tracks
+      trackService.search(this.searchQuery)
+        .then(res => {
+          console.log(res)
+        })
     }
   },
   computed: {
