@@ -20,9 +20,9 @@
   </template>
 
 <script>
-import trackService from './services/track.js'
-import OmFooter from './components/layout/Footer.vue'
-import OmHeader from './components/layout/Header.vue'
+import trackService from '@/services/track.js'
+import OmFooter from '@/components/layout/Footer.vue'
+import OmHeader from '@/components/layout/Header.vue'
 export default {
   name: 'app',
 
