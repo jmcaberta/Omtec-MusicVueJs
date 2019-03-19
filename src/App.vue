@@ -1,5 +1,7 @@
 <template lang="pug">
   #app
+    om-header
+
     section.section
       nav.nav.has-shadow
         .container
@@ -11,14 +13,21 @@
 
       .container.results
         .columns
-          .column(v-for="t in tracks") {{ t.name }} - {{ t.artist }}
+          .column(v-for="t in tracks")
+            | {{ t.name }} - {{ t.artists[0].name }}
+    om-footer
+
   </template>
 
 <script>
 import trackService from './services/track.js'
-
+import OmFooter from './components/layout/Footer.vue'
+import OmHeader from './components/layout/Header.vue'
 export default {
   name: 'app',
+
+  components: { OmFooter, OmHeader },
+
   data () {
     return {
       searchQuery: '',
@@ -27,9 +36,10 @@ export default {
   },
   methods: {
     search () {
+      if (!this.searchQuery) { return }
       trackService.search(this.searchQuery)
         .then(res => {
-          console.log(res)
+          this.tracks = res.tracks.items
         })
     }
   },

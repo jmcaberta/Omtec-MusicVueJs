@@ -1,4 +1,4 @@
-import omtecMusicService from './omtec-music'
+import omtecMusicService from './omtec-music.js'
 
 const trackService = {}
 
