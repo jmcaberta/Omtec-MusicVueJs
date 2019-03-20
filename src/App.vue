@@ -2,45 +2,66 @@
   #app
     om-header
 
-    section.section
+    om-loader(v-show="isLoading")
+    section.section(v-show="!isLoading")
       nav.nav.has-shadow
         .container
-          input.input.is-large(type="text", placeholder="Suchen", v-model="searchQuery")
-          a.button.is-info.is-large(@click="search") Suchen
+          input.input.is-large(type="text", placeholder="Suchen", v-model="searchQuery"
+          )
+          a.button.is-success.is-large(@click="search") Suchen
           a.button.is-danger.is-large &times;
-          p
-            small {{ searchMessage }}
+      .container
+        p
+          small {{ searchMessage }}
 
       .container.results
-        .columns
-          .column(v-for="t in tracks")
-            | {{ t.name }} - {{ t.artists[0].name }}
+        .columns.is-multiline
+          .column.is-one-quarter(v-for="t in tracks")
+            om-track(
+              :track="t",
+              @select="setSelectedTrack",
+              :class="{ 'is-active': t.id == selectedTrack }")
+
     om-footer
 
   </template>
 
 <script>
-import trackService from '@/services/track.js'
+import trackService from '@/services/track'
 import OmFooter from '@/components/layout/Footer.vue'
 import OmHeader from '@/components/layout/Header.vue'
+import OmTrack from '@/components/Track.vue'
+import OmLoader from '@/components/shared/Loader.vue'
 export default {
   name: 'app',
 
-  components: { OmFooter, OmHeader },
+  components: { OmFooter, OmHeader, OmTrack, OmLoader },
 
   data () {
     return {
       searchQuery: '',
-      tracks: []
+      tracks: [],
+
+      isLoading: false,
+
+      selectedTrack: ''
     }
   },
   methods: {
     search () {
       if (!this.searchQuery) { return }
+
+      this.isLoading = true
+
       trackService.search(this.searchQuery)
         .then(res => {
           this.tracks = res.tracks.items
+          this.isLoading = false
         })
+    },
+
+    setSelectedTrack (id) {
+      this.selectedTrack = id
     }
   },
   computed: {
@@ -53,8 +74,11 @@ export default {
 
 <style lang="scss">
   @import "./scss/main.scss";
-
   .results {
     margin-top: 50px;
+  }
+
+  .is-active{
+    border: 3px #5D4037 solid;
   }
 </style>
