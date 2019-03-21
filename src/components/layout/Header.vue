@@ -7,6 +7,8 @@
                         .nav-item
                             strong Omtec KG
                     .nav-right.nav-menu
+                        router-link.nav-item(:to="{ name: 'search'}") Search
+                        router-link.nav-item(to="about") Über uns
 
         .hero.body
             .container.has-text-centered
