@@ -2,6 +2,9 @@
   #app
     om-header
 
+    om-notification(v-show="showNotification")
+      p(slot="body") Keine Ergebnisse gefunden
+
     om-loader(v-show="isLoading")
     section.section(v-show="!isLoading")
       nav.nav.has-shadow
@@ -32,10 +35,11 @@ import OmFooter from '@/components/layout/Footer.vue'
 import OmHeader from '@/components/layout/Header.vue'
 import OmTrack from '@/components/Track.vue'
 import OmLoader from '@/components/shared/Loader.vue'
+import OmNotification from '@/components/shared/Notification.vue'
 export default {
   name: 'app',
 
-  components: { OmFooter, OmHeader, OmTrack, OmLoader },
+  components: { OmFooter, OmHeader, OmTrack, OmLoader, OmNotification },
 
   data () {
     return {
@@ -43,7 +47,7 @@ export default {
       tracks: [],
 
       isLoading: false,
-
+      showNotification: false,
       selectedTrack: ''
     }
   },
@@ -55,6 +59,8 @@ export default {
 
       trackService.search(this.searchQuery)
         .then(res => {
+          console.log(res)
+          this.showNotification = res.tracks.total === 0
           this.tracks = res.tracks.items
           this.isLoading = false
         })
@@ -67,6 +73,15 @@ export default {
   computed: {
     searchMessage () {
       return `gefunden: ${this.tracks.length}`
+    }
+  },
+  watch: {
+    showNotification () {
+      if (this.showNotification) {
+        setTimeout(() => {
+          this.showNotification = false
+        }, 3000)
+      }
     }
   }
 }
