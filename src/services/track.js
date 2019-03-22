@@ -7,12 +7,12 @@ trackService.search = function (q) {
   return omtecMusicService.get('/search', {
     params: { q, type }
   })
-    .then((res) => res.data)
+    .then(res => res.data)
 }
 
 trackService.getById = function (id) {
   return omtecMusicService.get(`/tracks/${id}`)
-    .then(res => res.datas)
+    .then(res => res.data)
 }
 
 export default trackService

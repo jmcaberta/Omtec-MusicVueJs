@@ -7,7 +7,7 @@
       section.section(v-show="!isLoading")
         nav.nav.has-shadow
           .container
-            input.input.is-large(type="text", placeholder="Suchen", v-model="searchQuery"
+            input.input.is-large(type="text", placeholder="Suchen", v-model="searchQuery", @keyup.enter="search"
             )
             a.button.is-success.is-large(@click="search") Suchen
             a.button.is-danger.is-large &times;

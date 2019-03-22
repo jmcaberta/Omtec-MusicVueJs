@@ -19,7 +19,9 @@
                     nav.level
                         .level-left
                             a.level-item
-                                span.button(@click="selectTrack") Play
+                                span.button(@click="selectTrack") zuhören
+                            a.level-item
+                                span.button(@click="goToTrack(track.id)") Lied
 </template>
 
 <script>
@@ -33,6 +35,9 @@ export default {
     selectTrack () {
       this.$emit('select', this.track.id)
       this.$bus.$emit('set-track', this.track)
+    },
+    goToTrack (id) {
+      this.$router.push({ name: 'track', params: { id } })
     }
   }
 }

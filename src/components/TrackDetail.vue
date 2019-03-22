@@ -1,5 +1,8 @@
 <template lang="pug">
-    om-track(:track="track")
+.container
+  .columns
+    .column.is-5.is-offset-4
+       om-track(:track="track")
 </template>
 
 <script>
@@ -18,8 +21,14 @@ export default {
 
     trackService.getById(id)
       .then(res => {
-        console.log(res)
+        this.track = res
       })
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.columns {
+      margin: 20px;
+}
+</style>
