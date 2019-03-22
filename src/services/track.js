@@ -10,4 +10,9 @@ trackService.search = function (q) {
     .then((res) => res.data)
 }
 
+trackService.getById = function (id) {
+  return omtecMusicService.get(`/tracks/${id}`)
+    .then(res => res.datas)
+}
+
 export default trackService
