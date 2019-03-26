@@ -18,9 +18,9 @@
                 small {{ track.duration_ms | ms-to-mm}}
                     nav.level
                         .level-left
-                            a.level-item
-                                span.button(@click="selectTrack") zuhören
-                            a.level-item
+                            button.level-item.button.is-success
+                                span.button(@click="selectTrack") =>
+                            button.level-item.button.is-primary
                                 span.button(@click="goToTrack(track.id)") Lied
 </template>
 
