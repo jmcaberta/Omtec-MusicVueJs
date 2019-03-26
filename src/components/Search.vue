@@ -1,9 +1,12 @@
 <template lang="pug">
   main
-      om-notification(v-show="showNotification")
-        p(slot="body") Keine Ergebnisse gefunden
+      transition(name="move")
+        om-notification(v-show="showNotification")
+          p(slot="body") Keine Ergebnisse gefunden
 
-      om-loader(v-show="isLoading")
+      transition(name="move")
+        om-loader(v-show="isLoading")
+
       section.section(v-show="!isLoading")
         nav.nav.has-shadow
           .container
@@ -17,6 +20,7 @@
 
         .container.results
           .columns.is-multiline
+            transition-group(name="move")
             .column.is-one-quarter(v-for="t in tracks")
               om-track(
                 v-blur="t.preview_url"
@@ -74,7 +78,7 @@ export default {
       if (this.showNotification) {
         setTimeout(() => {
           this.showNotification = false
-        }, 4000)
+        }, 40000)
       }
     }
   }
